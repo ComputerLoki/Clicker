@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html>
+    <meta charset="UTF-8">
+    <title>
+
+    </title>
+    <header>
+
+    </header>
+    <head>
+
+    </head>
+    <body style="margin-top: 5%; background-color: black;">
+        <div style="text-align: center;">
+            <label style="font-size: xx-large; color: white;">Wallet</label>
+            <br><br>
+            <input style="font-size: xx-large;" type="text" name="" id="Wallet">
+            <br><br>
+            <label style="font-size: xx-large; color: white;">Multiplier</label>
+            <br><br>
+            <input style="font-size: xx-large;" type="text" id="UpgradeAmount">
+            <br><br>
+            <button style="font-size: xx-large;" id="Clicker">Click Me!</button>
+            <br><br>
+            <label style="font-size: xx-large; color: white;" id="Cost"></label>
+            <br>
+            <button style="font-size: xx-large;" id="Upgrade">Upgrade</button>
+            <br><br>
+            <label style="font-size: xx-large; color: white;" id="AutoClickLable">$90000</label>
+            <br>
+            <button id="AutoClick" style="font-size: xx-large;">Auto Click!</button>
+        </div>
+        <script>
+            var AutoClick = document.getElementById("AutoClick");
+            var Clicker = document.getElementById("Clicker");
+            var Wallet = document.getElementById("Wallet");
+            var Upgrade = document.getElementById("Upgrade");
+            var UpgradeAmount = document.getElementById("UpgradeAmount");
+            var Cost = document.getElementById("Cost");
+            var Amounttoadd = 1;
+            var cost = 10;
+            Cost.innerHTML = "$"+cost.toString();
+            Wallet.value = "$1";
+            UpgradeAmount.value = "1x"
+            var AutoClickLable = document.getElementById("AutoClickLable")
+
+
+            Clicker.onclick = function(){
+                var Cash = Wallet.value;
+                var cash1 = Cash.slice(1,Cash.length)
+                var amount = parseInt(cash1)//1
+                var NewAmount = amount + Amounttoadd;
+                Wallet.value =  "$" + NewAmount
+            }
+            Upgrade.onclick = function(){
+                var Cash = Wallet.value;
+                var cash1 = Cash.slice(1,Cash.length)
+                var amount = parseInt(cash1)
+                if(amount >= cost){
+                    var NewAmount =  amount - cost;
+                    Wallet.value =  "$" + NewAmount.toString();
+                    var newcost = cost * 2;
+                    cost = newcost;
+                    var newammounttoadd = Amounttoadd * 2;
+                    Amounttoadd = newammounttoadd;
+                    Cost.innerHTML = "$"+cost.toString();
+                    UpgradeAmount.value = Amounttoadd + "x"
+                }
+            }
+            AutoClick.onclick = function(){
+                var label = AutoClickLable.innerHTML;
+                var AutoLable = label.slice(1,label.length)
+                var Cash = Wallet.value;
+                var cash1 = Cash.slice(1,Cash.length)
+                var amount = parseInt(cash1)
+                var Bought = 0;
+                if(amount >= 90000){
+                    var num = parseInt(label);
+                    var newwallet = amount - num;
+                    Wallet.innerHTML = "$" + newwallet;
+                    var newlable = AutoLable * 2;
+                    AutoClickLable.innerHTML = "$" + newlable
+                    Bought++;
+                    function AutoClicker(){
+                        Clicker.click();
+                        console.log("Clicking")
+                    }
+                    var Click = window.setInterval(AutoClicker,1)
+                    AutoClick.hidden = true;
+                    AutoClickLable.hidden = true;
+                }
+            }
+        </script>
+    </body>
+    <html>
+</html>
